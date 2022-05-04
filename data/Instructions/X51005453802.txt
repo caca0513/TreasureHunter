@@ -1,0 +1,23 @@
+#For Form X51005453802:
+
+#Indicators for {company}:
+	1. All Below to the bottom +0.14613 of {%OP%}, All Above to the bottom +0.16925 of {%OP%}, is {company}
+
+#Indicators for {date}:
+	1. Find {TAX}
+	2. right to {TAX}, Find {INVOICE}
+	3. All below to {INVOICE}, Find {NO}
+	4. left to {NO}, is {date}
+
+#Indicators for {total}
+	1. Find {TOTAL}
+	2. right to {TOTAL}, Find {AMT}
+	3. right to {AMT}, Find {PAYABLE}
+	4. right to {PAYABLE}, Find {:}
+	5. right to {:}, is {total}
+
+#Indicators for {address}
+	1. Find {GST}
+	2. right to {GST}, Find {ID}
+	3. Find {(162761-M)}
+	4. All below to {(162761-M)}, all above to {ID}, is {address}

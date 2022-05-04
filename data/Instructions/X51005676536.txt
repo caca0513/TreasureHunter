@@ -1,0 +1,22 @@
+#For Form X51005676536:
+
+#Indicators for {company}:
+	1. Find {(81109-A)}
+	1. All Above to {(81109-A)}, is {company}
+
+#Indicators for {date}:
+	1. Find {CASHIER}
+	2. above to {CASHIER}, Find {DOC}
+	3. right to {DOC}, Find {DATE}
+	4. right to {DATE}, Find {:}
+	5. right to {:}, is {date}
+
+#Indicators for {total}
+	1. Find {ROUNDING}
+	2. below to {ROUNDING}, Find {CASH}
+	3. right to {CASH}, Find {:}
+	4. right to {:}, is {total}
+
+#Indicators for {address}
+	1. Find {TEL}
+	2. All below to {(81109-A)}, all above to {TEL}, is {address}

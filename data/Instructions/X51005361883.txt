@@ -1,0 +1,23 @@
+#For Form X51005361883:
+
+#Indicators for {company}:
+	1. Find {001451637}
+	2. All Above to {001451637}, is {company}
+
+#Indicators for {date}:
+	1. Find {RECEIPT}
+	2. right to {RECEIPT}, Find {DATE}
+	3. right to {DATE}, Find {:}
+	4. right to {:}, is {date}
+
+#Indicators for {total}
+	1. Find {ROUNDING}
+	2. Find {DISC%}
+	3. right to {DISC%}, Find {AMOUNT}
+	4. Below to {ROUNDING}, Find {CASH}
+	5. Below to {ROUNDING}, above to {CASH}, Find {TOTAL}
+	6. right to {TOTAL}, below to {AMOUNT}, is {total}
+
+#Indicators for {address}
+	1. Find {FAX}
+	2. All below to {001451637}, all above to {FAX}, is {address}
