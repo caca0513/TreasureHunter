@@ -6,6 +6,7 @@ from matplotlib.collections import PatchCollection
 import pandas as pd
 import re
 import itertools as it
+import pickle
 import cv2
 import io
 import datetime
@@ -246,7 +247,7 @@ def try_mapping_1(sp1, sp2, max_mapping=5):
 def show_mapping(sp1, sp2, 
                 figsize=(10, 10), 
                 ax=None,
-                mapping=None, imshow=True):
+                mapping=None, imshow=True, invert_y=True):
     
     ax1 = ax
 
@@ -259,10 +260,11 @@ def show_mapping(sp1, sp2,
     if ax1 is None:
         fig, ax1 = plt.subplots(figsize=figsize)
     
-    ax1.xaxis.set_ticks_position('top')
     ax1.set_ylim(ymin=0, ymax=1)
     ax1.set_xlim(xmin=0, xmax=1)
-    ax1.invert_yaxis()
+    if invert_y:
+        ax1.xaxis.set_ticks_position('top')
+        ax1.invert_yaxis()
     
     for s, c in zip([sp1, sp2], ['red', 'green']):
         for cor, t in zip(s.centers, s.texts):
@@ -313,3 +315,36 @@ def debug_process(pairs, samples):
     print('elapse:', el)
     print('avg time per pair:', el/n)
     return df
+
+
+def load_or_generate_samples_dict(fn, data_root):
+    dumped_samples = path.join(data_root, 'temp', fn)
+
+    if path.isfile(dumped_samples):
+        with open(dumped_samples, 'rb') as f:
+            samples = pickle.load(f)
+    else:       
+        samples = {fn:pipeline1(fn, data_root) for fn in files}
+        #np.random.shuffle(samples)
+        with open(dumped_samples, 'wb') as f:
+            pickle.dump(samples, f)
+    return samples
+
+def load_or_generate_df(fn, data_root, samples):
+    dumped_df = path.join(data_root, 'temp', fn)
+    pairs = list(it.combinations(range(len(samples)), 2))
+
+    if path.isfile(dumped_df):
+        with open(dumped_df, 'rb') as f:
+            df = pickle.load(f)
+    else:       
+        df = debug_process(pairs, samples)
+
+        with open(dumped_df, 'wb') as f:
+            pickle.dump(df, f)
+    return df
+
+def save_df(df, fn, data_root):
+    dumped_df = path.join(data_root, 'temp', fn)
+    with open(dumped_df, 'wb') as f:
+        pickle.dump(df, f)
